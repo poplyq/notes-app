@@ -61,7 +61,7 @@ export const ListNotes = () => {
         if (isEdit) {
             setArrayOfNotes(prev => [...prev.slice(0, index), editedNote, ...prev.slice(index + 1)])
         }
-    }, [editedNote,index, isEdit])
+    }, [editedNote,index, isEdit, setArrayOfNotes])
 
     return (
         <div>
