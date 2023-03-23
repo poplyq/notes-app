@@ -18,7 +18,7 @@ export const Sort = () => {
                 }
             }
             );
-    }, [currentHashtag])
+    }, [currentHashtag, arrayOfNotes])
 
     return (
         <div>

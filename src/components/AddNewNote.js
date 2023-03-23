@@ -57,7 +57,7 @@ export const AddNewNote = () => {
         }
         setText('')
         newarray = []
-    }, [newNote])
+    }, [newNote, setArrayOfNotes])
 
     return (
         <div onKeyUp={event => escape(event.key)}>
