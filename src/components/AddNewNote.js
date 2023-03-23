@@ -5,7 +5,7 @@ import { Context } from "./context/Context";
 
 let newarray = []
 export const AddNewNote = () => {
-    const {setArrayOfNotes, isSort, setIsSort } = useContext(Context)
+    const { setArrayOfNotes, isSort, setIsSort } = useContext(Context)
     const [text, setText] = useState("")
     const [addNote, setAddNote] = useState(false)
 
@@ -26,8 +26,9 @@ export const AddNewNote = () => {
             .split(' ')
             .map(element => {
                 if (element[0] === '#') {
-                    newarray.push(element)
+                  newarray.push(element)
                 }
+                return newarray
             }
             )
         setNewNote
@@ -38,6 +39,7 @@ export const AddNewNote = () => {
                 }
             )
         setAddNote(false)
+       console.log(array);
     }
 
     function addNoteArea(parametr) {

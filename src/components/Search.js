@@ -19,7 +19,7 @@ export const Search = () => {
                             console.log(array);
                         }
                         );
-
+                 return arrayOfNotes
                 }
                 )
             setIsDisplay(true)

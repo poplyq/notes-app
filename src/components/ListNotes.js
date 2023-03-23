@@ -47,6 +47,7 @@ export const ListNotes = () => {
                     newarray
                         .push(element)
                 }
+                return array
             }
             )
         setNote(
@@ -119,9 +120,10 @@ export const ListNotes = () => {
                                         onClick={event => sortOn(element)}
                                         className="curentHashtag"
                                     >
-                                        {element}
+                                     {element}
                                     </Link>
                                 }
+                                return text
                             }
                             )
                         }
