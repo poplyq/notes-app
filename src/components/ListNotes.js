@@ -40,14 +40,14 @@ export const ListNotes = () => {
 
     function editNote() {
         setIsEdit(false)
-        let array = text
+        var array = text
             .split(' ')
             .map(element => {
                 if (element[0] === '#') {
                     newarray
                         .push(element)
                 }
-                return array
+                return console.log(array);
             }
             )
         setNote(
@@ -61,7 +61,7 @@ export const ListNotes = () => {
         if (isEdit) {
             setArrayOfNotes(prev => [...prev.slice(0, index), editedNote, ...prev.slice(index + 1)])
         }
-    }, [editedNote,index, isEdit, setArrayOfNotes])
+    }, [editedNote, index, isEdit,setArrayOfNotes])
 
     return (
         <div>
@@ -112,18 +112,17 @@ export const ListNotes = () => {
                     <p>
                         {text
                             .split(" ")
-                            .map(element => {
+                            .map((element, index) => {
 
                                 if (element[0] === '#') {
 
-                                    return <Link to="/sort"
+                                    return <Link  key={index} to="/sort"
                                         onClick={event => sortOn(element)}
                                         className="curentHashtag"
                                     >
-                                     {element}
+                                        {element}
                                     </Link>
-                                }
-                                return text
+                                } return <br key={index}/>
                             }
                             )
                         }
@@ -144,7 +143,7 @@ export const ListNotes = () => {
                             className="addNoteText"
                             value={text}
                             onChange={event => setText(event.target.value)}
-                            autoFocus='true'
+                            autoFocus={true}
                         >
                         </textarea>
                         <button

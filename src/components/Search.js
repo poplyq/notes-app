@@ -48,7 +48,7 @@ export const Search = () => {
                     <div
                         className="hashtagContainer">
 
-                        <ul>
+                        <ul >
                             {
                                 array
                                     .map((element, index) => (

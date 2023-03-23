@@ -22,13 +22,14 @@ export const AddNewNote = () => {
     }
 
     const addNewNote = () => {
+        console.log(1);
         let array = text
             .split(' ')
             .map(element => {
                 if (element[0] === '#') {
                   newarray.push(element)
                 }
-                return newarray
+              return newarray
             }
             )
         setNewNote
@@ -39,7 +40,9 @@ export const AddNewNote = () => {
                 }
             )
         setAddNote(false)
-       console.log(array);
+      
+    console.log(array);
+   
     }
 
     function addNoteArea(parametr) {
@@ -86,7 +89,7 @@ export const AddNewNote = () => {
                         className="addNoteText"
                         value={text}
                         onChange={event => addText(event.target.value)}
-                        autoFocus='true'
+                        autoFocus={true}
                     >
                     </textarea>
                     <button
