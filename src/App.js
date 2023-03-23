@@ -1,23 +1,38 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { AddNewNote } from './components/AddNewNote';
+import { Search } from './components/Search';
+import { Context } from './components/context/Context';
+import { useEffect, useLayoutEffect, useState } from 'react';
+import { ListNotes } from './components/ListNotes';
+import { Routes, Route } from 'react-router-dom';
+import { Sort } from './components/Sort';
+
 
 function App() {
+  const [arrayOfNotes, setArrayOfNotes] = useState([])
+  const [currentHashtag, setCurrentHashtag]=useState('')
+  const [isSort, setIsSort]=useState(false)
+
+  useLayoutEffect(()=>{
+    setArrayOfNotes(JSON.parse(localStorage.getItem("array")) || [])
+  },[])
+
+useEffect(()=>{
+  localStorage.setItem("array", JSON.stringify(arrayOfNotes));
+},[arrayOfNotes])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+    <Context.Provider value={{ arrayOfNotes, setArrayOfNotes,currentHashtag, setCurrentHashtag, isSort, setIsSort }}>
+     <div className='containerUpper'>
+      <Search />
+      <AddNewNote />
+      </div>
+      <Routes>
+        <Route path="" element={<ListNotes />} />
+        <Route path="/sort" element={<Sort/>} />
+      </Routes>
+    </Context.Provider>
     </div>
   );
 }
