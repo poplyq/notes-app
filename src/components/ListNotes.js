@@ -1,21 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "./context/Context";
 import { CurrentNote } from "./CurrentNote";
 import { Edit } from "./Edit";
 
-let newarray = []
+
 export const ListNotes = () => {
-    const { arrayOfNotes, setArrayOfNotes, setCurrentHashtag, setIsSort } = useContext(Context)
+    const { arrayOfNotes, setArrayOfNotes, setCurrentHashtag, setIsSort, setCurrentNoteIndex, isEdit, setIsEdit} = useContext(Context)
     const [isOpen, setOpen] = useState(false)
     const [text, setText] = useState('')
-    const [isEdit, setIsEdit] = useState(false)
-    const [index, setIndex] = useState('')
-    const [editedNote, setNote] = useState({
-        id: '',
-        text: '',
-        hashtags: [],
-    })
+
 
     const onClick = (event, e) => {
         setText(e)
@@ -25,44 +19,17 @@ export const ListNotes = () => {
     const close = () => setOpen(false)
 
     const deleteItem = (event, index) => {
-        setArrayOfNotes(prev => [...prev.slice(0, index), ...prev.slice(index + 1)])
+     setArrayOfNotes(prev => [...prev.slice(0, index), ...prev.slice(index + 1)])
     }
 
     function sortOn(element) {
         setCurrentHashtag(element)
         setIsSort(true)
     }
-    const editItem = (event, text, index) => {
-        setIsEdit(true)
-        setText(text)
-        setIndex(index)
-    }
-
-    function editNote() {
-        setIsEdit(false)
-        var array = text
-            .split(' ')
-            .map(element => {
-                if (element[0] === '#') {
-                    newarray
-                        .push(element)
-                }
-                return console.log(array);
-            }
-            )
-        setNote(
-            {
-                text: text,
-                hashtags: newarray
-            }
-        )
-    }
-    useEffect(() => {
-        if (isEdit) {
-            setArrayOfNotes(prev => [...prev.slice(0, index), editedNote, ...prev.slice(index + 1)])
-        }
-    }, [editedNote, index, isEdit,setArrayOfNotes])
-
+ function editNote (index){
+    setCurrentNoteIndex(index)
+    setIsEdit(true)
+ }
     return (
         <div>
             <ul
@@ -89,11 +56,11 @@ export const ListNotes = () => {
                                 >
                                     delete
                                 </button>
-                                <button
+                                <button 
                                     className="noteButton"
-                                    onClick={event => editItem(event, item.text, index)}
+                                    onClick={event=>editNote(index)}
                                 >
-                                    edit
+                                    edit 
                                 </button>
 
                             </div>
@@ -137,30 +104,7 @@ export const ListNotes = () => {
                 )
             }
             {
-                isEdit && (
-                    <Edit>
-                        <textarea
-                            className="addNoteText"
-                            value={text}
-                            onChange={event => setText(event.target.value)}
-                            autoFocus={true}
-                        >
-                        </textarea>
-                        <button
-                            className="editNoteButton"
-                            onClick={editNote}
-                        >
-                            Edit
-                        </button>
-                        <button
-                            className="addNoteCloseButton"
-                            onClick={event => setIsEdit(false)}
-                        >
-                            X
-                        </button>
-
-                    </Edit>
-                )
+                isEdit && <Edit/>
             }
         </div>
     )

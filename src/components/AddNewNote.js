@@ -22,7 +22,6 @@ export const AddNewNote = () => {
     }
 
     const addNewNote = () => {
-        console.log(1);
         let array = text
             .split(' ')
             .map(element => {
@@ -60,7 +59,8 @@ export const AddNewNote = () => {
         }
         setText('')
         newarray = []
-    }, [newNote, setArrayOfNotes])
+
+    }, [newNote,setArrayOfNotes])
 
     return (
         <div onKeyUp={event => escape(event.key)}>
